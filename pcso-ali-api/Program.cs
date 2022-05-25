@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,10 +8,18 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSignalR()
+              .AddAzureSignalR("Endpoint=https://live-pcso.service.signalr.net;AccessKey=W1fDCRLThmuwR7c9zsgMYvUPC+GRDA+aAVv1Cnxlod0=;Version=1.0;");
+
 var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
     app.UseHttpsRedirection();
+
+app.UseAzureSignalR(routes =>
+{
+    routes.MapHub<Chat>("/chat");
+});
 
 app.MapGet("/", () => "Hello World!");
 
@@ -69,6 +78,18 @@ app.MapDelete("/todoitems", async (TodoDb db) =>
 });
 
 app.Run();
+public class Chat : Hub
+{
+    public void BroadcastMessage(string name, string message)
+    {
+        Clients.All.SendAsync("broadcastMessage", name, message);
+    }
+
+    public void Echo(string name, string message)
+    {
+        Clients.Client(Context.ConnectionId).SendAsync("echo", name, message + " (echo from server)");
+    }
+}
 
 class Todo
 {
