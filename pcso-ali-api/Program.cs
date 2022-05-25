@@ -88,7 +88,7 @@ public class Chat : Hub
 {
     public void Broadcast(string name, string message)
     {
-        Clients.All.SendAsync("Receiver", name, message);
+        Clients.All.SendAsync("Receive", name, message);
     }
 }
 
