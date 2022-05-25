@@ -17,7 +17,7 @@ var app = builder.Build();
     app.UseSwaggerUI();
     app.UseHttpsRedirection();
 
-app.MapHub<Chat>("/chat");
+app.MapHub<Chat>(nameof(Chat));
 
 app.MapGet("/", () => "Hello World!");
 
