@@ -9,7 +9,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSignalR();
-             // .AddAzureSignalR("Endpoint=https://live-pcso.service.signalr.net;AccessKey=W1fDCRLThmuwR7c9zsgMYvUPC+GRDA+aAVv1Cnxlod0=;Version=1.0;");
 
 builder.Services.AddCors();
 
@@ -87,9 +86,9 @@ app.Run();
 
 public class Chat : Hub
 {
-    public void SendMessage(string name, string message)
+    public void Broadcast(string name, string message)
     {
-        Clients.All.SendAsync("ReceiveMessage", name, message);
+        Clients.All.SendAsync("Receiver", name, message);
     }
 }
 
