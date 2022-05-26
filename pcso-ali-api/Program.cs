@@ -22,7 +22,7 @@ app.UseAzureSignalR(routes =>
     routes.MapHub<Chat>("/chat");
 });
 
-app.MapHub<Chat>(nameof(Chat));
+//app.MapHub<Chat>(nameof(Chat));
 
 app.MapGet("/", () => "Hello World!");
 
