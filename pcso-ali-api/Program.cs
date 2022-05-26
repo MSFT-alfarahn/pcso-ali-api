@@ -8,7 +8,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSignalR().AddAzureSignalR("Endpoint=https://live-pcso.service.signalr.net;AccessKey=W1fDCRLThmuwR7c9zsgMYvUPC+GRDA+aAVv1Cnxlod0=;Version=1.0;");
+builder.Services.AddSignalR();//.AddAzureSignalR("Endpoint=https://live-pcso.service.signalr.net;AccessKey=W1fDCRLThmuwR7c9zsgMYvUPC+GRDA+aAVv1Cnxlod0=;Version=1.0;");
 
 builder.Services.AddCors();
 
